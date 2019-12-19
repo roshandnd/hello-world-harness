@@ -1,0 +1,19 @@
+harnessApiVersion: '1.0'
+type: KUBERNETES_CLUSTER
+delegateName: michael-k3s-delegate
+password: amazonkms:2EP2rHlNQ26Ckcdzj028Pg
+skipValidation: false
+usageRestrictions:
+  appEnvRestrictions:
+  - appFilter:
+      filterType: ALL
+    envFilter:
+      filterTypes:
+      - PROD
+  - appFilter:
+      filterType: ALL
+    envFilter:
+      filterTypes:
+      - NON_PROD
+useKubernetesDelegate: true
+username: michael.nelson@harness.io
