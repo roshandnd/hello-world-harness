@@ -7,7 +7,7 @@ clientKeyPassphrase: amazonkms:6HzQcGCNTbGLArXrNASx8w
 delegateName: harness-sample-k8s-delegate
 password: amazonkms:LoNkGFnURk2nP_xJL7gzjg
 serviceAccountToken: amazonkms:lp8fcAS8T4mzqz2P8ZbHgA
-skipValidation: false
+skipValidation: true
 usageRestrictions:
   appEnvRestrictions:
   - appFilter:

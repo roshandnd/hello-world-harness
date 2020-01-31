@@ -4,3 +4,4 @@ tag:
 - allowedValues:
   - Start
   name: Status
+- name: Testing
