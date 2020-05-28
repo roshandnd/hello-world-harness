@@ -1,6 +1,6 @@
 harnessApiVersion: '1.0'
 type: ARTIFACTORY
-password: amazonkms:LR8LAsrkSoWOOAQiVNYPsA
+password: gcpkms:LR8LAsrkSoWOOAQiVNYPsA
 url: https://harness.jfrog.io/harness
 usageRestrictions:
   appEnvRestrictions:
