@@ -6,7 +6,6 @@ failureStrategies:
 - executionScope: WORKFLOW
   failureTypes:
   - APPLICATION_ERROR
-  - CONNECTIVITY
   repairActionCode: ROLLBACK_WORKFLOW
   retryCount: 0
 notificationRules:
