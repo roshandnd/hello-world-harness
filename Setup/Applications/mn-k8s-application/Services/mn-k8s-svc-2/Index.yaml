@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: SERVICE
+artifactType: DOCKER
+configVariables:
+- name: Test
+  value: Test1
+  valueType: TEXT
+deploymentType: KUBERNETES

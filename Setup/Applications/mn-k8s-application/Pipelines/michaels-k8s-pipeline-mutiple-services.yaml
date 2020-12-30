@@ -1,0 +1,75 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+pipelineStages:
+- type: ENV_STATE
+  name: DEV
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Dev
+  workflowName: mn-k8s-rolling-dev
+  workflowVariables:
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_Kubernetes
+    value: mn-local_k8s_id
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: mn-local-k8s-dev
+  - entityType: SERVICE
+    name: Service
+    value: mn-k8s-svc
+- type: ENV_STATE
+  name: svc2
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 2
+  workflowName: mn-k8s-rolling-dev
+  workflowVariables:
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_Kubernetes
+    value: mn-local_k8s_id
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: mn-local-k8s-dev
+  - entityType: SERVICE
+    name: Service
+    value: mn-k8s-svc-2
+- type: ENV_STATE
+  name: svc3
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 3
+  workflowName: mn-k8s-rolling-dev
+  workflowVariables:
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_Kubernetes
+    value: mn-local_k8s_id
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: mn-local-k8s-dev
+  - entityType: SERVICE
+    name: Service
+    value: mn-k8s-svc-clone
+- type: APPROVAL
+  name: Approval 3
+  parallel: false
+  properties:
+    userGroups:
+    - Account Administrator
+    - Michael-test-group
+    workflowVariables: null
+    stageName: Approve
+    timeoutMillis: 604800000
+    approvalStateType: USER_GROUP
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Approve
+- type: ENV_STATE
+  name: QA
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: QA
+  workflowName: mn-k8s-rolling-qa

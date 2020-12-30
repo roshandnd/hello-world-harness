@@ -1,0 +1,27 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+pipelineStages:
+- type: ENV_STATE
+  name: QA
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: QA
+  workflowName: mn-k8s-rolling-qa
+- type: ENV_STATE
+  name: Prod
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 6
+  workflowName: mn-k8s-rolling-dev-clone
+  workflowVariables:
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_Kubernetes
+    value: mn-k8s-prod
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: mn-k8s-envt
+  - entityType: SERVICE
+    name: Service
+    value: mn-k8s-svc-2

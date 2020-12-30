@@ -1,0 +1,12 @@
+harnessApiVersion: '1.0'
+type: TRIGGER
+continueWithDefaultValues: false
+executionName: michael-k8s-full
+executionType: Pipeline
+triggerCondition:
+- type: WEBHOOK
+  action:
+  - closed
+  eventType:
+  - pull_request
+  repositoryType: GITHUB

@@ -1,0 +1,95 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+pipelineStages:
+- type: ENV_STATE
+  name: DEV
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Dev
+  workflowName: mn-k8s-rolling-dev
+  workflowVariables:
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_Kubernetes
+    value: mn-k8s-dev
+  - name: slackGroup
+    value: MichaelTestGroup
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: mn-k8s-envt
+  - entityType: SERVICE
+    name: Service
+    value: mn-k8s-svc
+- type: APPROVAL
+  name: Approval 1
+  parallel: false
+  properties:
+    userGroups:
+    - Account Administrator
+    variables:
+    - name: info
+      value: '{context.info.name}'
+    - name: Foo
+      value: bar
+    - name: serviceName
+      value: mn-k8s-svc
+    stageName: STAGE 2
+    timeoutMillis: 604800000
+    approvalStateType: USER_GROUP
+    sweepingOutputName: service
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 2
+- type: ENV_STATE
+  name: svc2
+  parallel: false
+  skipCondition:
+    expression: ${service.serviceName}=="mn-k8s-svc"
+    type: CONDITIONAL_SKIP
+  stageName: STAGE 2
+  workflowName: mn-k8s-rolling-dev
+  workflowVariables:
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_Kubernetes
+    value: mn-local_k8s_id
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: mn-local-k8s-dev
+  - entityType: SERVICE
+    name: Service
+    value: mn-k8s-svc-2
+- type: APPROVAL
+  name: Approval 3
+  parallel: false
+  properties:
+    userGroups:
+    - Account Administrator
+    - Michael-test-group
+    workflowVariables: null
+    stageName: Approve
+    timeoutMillis: 604800000
+    approvalStateType: USER_GROUP
+  skipCondition:
+    type: ALWAYS_SKIP
+  stageName: Approve
+- type: ENV_STATE
+  name: QA
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: QA
+  workflowName: mn-k8s-rolling-qa
+- type: ENV_STATE
+  name: Prod
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 5
+  workflowName: mn-k8s-prod-wf
+  workflowVariables:
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_Kubernetes
+    value: mn-k8s-prod
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: mn-k8s-envt

@@ -1,0 +1,13 @@
+harnessApiVersion: '1.0'
+type: INFRA_DEFINITION
+cloudProviderType: KUBERNETES_CLUSTER
+deploymentType: KUBERNETES
+infrastructure:
+- type: DIRECT_KUBERNETES
+  cloudProviderName: mn-local-k3s
+  namespace: qa
+  releaseName: release-${infra.kubernetes.infraId}
+scopedServices:
+- mn-k8s-svc
+- mn-k8s-svc-clone
+- remote-manifest

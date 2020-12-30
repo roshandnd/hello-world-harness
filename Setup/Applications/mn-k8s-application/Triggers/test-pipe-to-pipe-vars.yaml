@@ -1,0 +1,17 @@
+harnessApiVersion: '1.0'
+type: TRIGGER
+artifactSelections:
+- pipelineName: pipe-1
+  regex: false
+  serviceName: mn-k8s-svc
+  type: LAST_DEPLOYED
+- pipelineName: michael-dev-only
+  regex: false
+  serviceName: mn-k8s-svc-2
+  type: LAST_DEPLOYED
+continueWithDefaultValues: false
+executionName: michael-dev-only
+executionType: Pipeline
+triggerCondition:
+- type: PIPELINE_COMPLETION
+  pipelineName: pipe-1

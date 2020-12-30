@@ -1,0 +1,21 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+description: test for non prod pipeline
+pipelineStages:
+- type: ENV_STATE
+  name: DEV
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 2
+  workflowName: mn-k8s-rolling-dev
+  workflowVariables:
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_Kubernetes
+    value: mn-local_k8s_id
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: mn-local-k8s-dev
+  - entityType: SERVICE
+    name: Service
+    value: mn-k8s-svc
