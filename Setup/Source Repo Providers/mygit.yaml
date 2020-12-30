@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: GIT
+branch: master
+keyAuth: false
+password: gcpkms:4ubpS602SYCfqR4ulptVkw
+url: https://github.com/harness-mn/hello-world.git
+urlType: REPO
+username: michael.nelson@harness.io
