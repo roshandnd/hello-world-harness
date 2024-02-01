@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_roshandnd_hello_world_harness_1706789054009-push-trigger-input-set
+  identifier: Build_roshandnd_hello_world_harness_1706789054009pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: demo
+  pipeline:
+    identifier: Build_roshandnd_hello_world_harness_1706789054009
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
